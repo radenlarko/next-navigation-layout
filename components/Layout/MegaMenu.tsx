@@ -73,13 +73,15 @@ const MegaMenu = ({ menuType, menuProp, setMenuProp }: Props) => {
         opacity={isMegaMenu ? 1 : 0}
       >
         <Box position="relative" borderRadius="lg" overflow="hidden">
-          <Image
-            src={menuProp.mainImage}
-            alt="main-section"
-            width={460}
-            height={210}
-            style={{ objectFit: "cover", width: 460, height: 210 }}
-          />
+          {isMegaMenu ? (
+            <Image
+              src={menuProp.mainImage}
+              alt="main-section"
+              width={460}
+              height={210}
+              style={{ objectFit: "cover", width: 460, height: 210 }}
+            />
+          ) : null}
         </Box>
         <Box mt={4}>
           <Grid templateColumns="repeat(3, 1fr)" gap={2}>
