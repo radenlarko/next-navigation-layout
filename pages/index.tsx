@@ -190,18 +190,18 @@ export default function Home() {
             pt={24}
             maxW="7xl"
             mx="auto"
-            sx={{ columnCount: [1, 2, 3], columnGap: "8px" }}
+            sx={{ columnCount: [1, 2, 4], columnGap: 2 }}
           >
             {srces.map((src) => (
-              <ChakraImage
+              <Box
                 key={src}
-                w="100%"
                 borderRadius="xl"
-                mb={2}
+                mb={1}
                 display="inline-block"
-                src={src}
-                alt="Alt"
-              />
+                overflow="hidden"
+              >
+                <ChakraImage src={src} alt="Alt" />
+              </Box>
             ))}
           </Box>
         </Box>
