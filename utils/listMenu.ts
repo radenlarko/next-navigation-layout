@@ -6,8 +6,13 @@ export const menuDesktop: MenuDesktop[] = [
     items: [
       {
         name: "Rumah Tangga",
-        mainImage: "https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_960_720.jpg",
-        images: ["https://cdn.pixabay.com/photo/2017/03/22/17/39/kitchen-2165756_960_720.jpg", "https://cdn.pixabay.com/photo/2015/10/20/18/57/furniture-998265_960_720.jpg", "https://cdn.pixabay.com/photo/2017/09/09/18/25/living-room-2732939_960_720.jpg"],
+        mainImage:
+          "https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_960_720.jpg",
+        images: [
+          "https://cdn.pixabay.com/photo/2017/03/22/17/39/kitchen-2165756_960_720.jpg",
+          "https://cdn.pixabay.com/photo/2015/10/20/18/57/furniture-998265_960_720.jpg",
+          "https://cdn.pixabay.com/photo/2017/09/09/18/25/living-room-2732939_960_720.jpg",
+        ],
         items: [
           {
             title: "Dekorasi Rumah",
@@ -183,8 +188,13 @@ export const menuDesktop: MenuDesktop[] = [
       },
       {
         name: "Dapur Minimalis",
-        mainImage: "https://cdn.pixabay.com/photo/2017/06/13/22/42/kitchen-2400367_960_720.jpg",
-        images: ["https://cdn.pixabay.com/photo/2015/05/31/11/24/tap-791172_960_720.jpg", "https://cdn.pixabay.com/photo/2014/11/24/14/39/potatoes-544073_960_720.jpg", "https://cdn.pixabay.com/photo/2018/03/08/12/21/equipment-3208503_960_720.jpg"],
+        mainImage:
+          "https://cdn.pixabay.com/photo/2017/06/13/22/42/kitchen-2400367_960_720.jpg",
+        images: [
+          "https://cdn.pixabay.com/photo/2015/05/31/11/24/tap-791172_960_720.jpg",
+          "https://cdn.pixabay.com/photo/2014/11/24/14/39/potatoes-544073_960_720.jpg",
+          "https://cdn.pixabay.com/photo/2018/03/08/12/21/equipment-3208503_960_720.jpg",
+        ],
         items: [
           {
             title: "Peralatan Dapur",
@@ -199,8 +209,13 @@ export const menuDesktop: MenuDesktop[] = [
       },
       {
         name: "Furnitur",
-        mainImage: "https://cdn.pixabay.com/photo/2016/04/18/13/53/room-1336497_960_720.jpg",
-        images: ["https://cdn.pixabay.com/photo/2016/11/19/17/25/furniture-1840463_960_720.jpg", "https://cdn.pixabay.com/photo/2018/05/02/09/02/baby-boy-3368016_960_720.jpg", "https://cdn.pixabay.com/photo/2021/07/20/06/19/living-room-6479849_960_720.jpg"],
+        mainImage:
+          "https://cdn.pixabay.com/photo/2016/04/18/13/53/room-1336497_960_720.jpg",
+        images: [
+          "https://cdn.pixabay.com/photo/2016/11/19/17/25/furniture-1840463_960_720.jpg",
+          "https://cdn.pixabay.com/photo/2018/05/02/09/02/baby-boy-3368016_960_720.jpg",
+          "https://cdn.pixabay.com/photo/2021/07/20/06/19/living-room-6479849_960_720.jpg",
+        ],
         items: [
           {
             title: "Kursi",
@@ -248,12 +263,12 @@ export const mobileMenu: LinkItem[] = [
     link: "/",
   },
   {
-    name: "Inspirasi",
-    link: "/inspirasi",
+    name: "Kategori",
+    link: "/kategori",
   },
   {
-    name: "Transaksi",
-    link: "/transaksi",
+    name: "Inspirasi",
+    link: "/inspirasi",
   },
   {
     name: "Profil",

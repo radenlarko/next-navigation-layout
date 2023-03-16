@@ -2,11 +2,11 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import {
   Box,
-  Flex,
+  Button,
   Grid,
   GridItem,
   HStack,
-  SimpleGrid,
+  Image as ChakraImage,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -16,6 +16,7 @@ import { menuDesktop } from "@/utils/listMenu";
 import { KategoriItem, MenuDesktop } from "@/types";
 import sx from "@/utils/scrollStyle";
 import Image from "next/image";
+import srces from "@/utils/listImage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,9 +43,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={inter.className}>
-        <Box bg="gray.100" minH="100vh">
-          <Box bg="white">
-            <HStack maxW="7xl" h={30} alignItems="center" mx="auto">
+        <Box bg="gray.100" minH="100vh" position="relative">
+          <Box bg="white" position="fixed" zIndex={50} w="full">
+            <HStack maxW="7xl" px={2} h={30} alignItems="center" mx="auto">
               {menuDesktop.map((item) => (
                 <Box
                   key={item.name}
@@ -58,13 +59,13 @@ export default function Home() {
               ))}
             </HStack>
             <Box
-              bg="white"
               role="group"
               boxShadow="sm"
               onMouseLeave={() => setMenuProp(initialMenuProp)}
             >
               <HStack
                 maxW="7xl"
+                px={2}
                 h={50}
                 alignItems="center"
                 mx="auto"
@@ -102,6 +103,7 @@ export default function Home() {
                 <Stack
                   direction="row"
                   maxW="7xl"
+                  px={2}
                   mx="auto"
                   h="360px"
                   pb={8}
@@ -110,9 +112,9 @@ export default function Home() {
                   _groupHover={{ display: "flex" }}
                 >
                   <Box flex={1} overflow="auto" sx={sx}>
-                    <SimpleGrid columns={3} spacing={4}>
+                    <Box sx={{ columnCount: [1, 2, 3], columnGap: "16px" }}>
                       {menuProp.items.map((val) => (
-                        <Box key={val.title}>
+                        <Box key={val.title} mb={4} display="inline-block">
                           <Text fontWeight={500} fontSize="lg">
                             {val.title}
                           </Text>
@@ -134,7 +136,7 @@ export default function Home() {
                           </Stack>
                         </Box>
                       ))}
-                    </SimpleGrid>
+                    </Box>
                   </Box>
                   <Box w="460px" display={{ base: "none", lg: "block" }}>
                     <Box
@@ -179,6 +181,28 @@ export default function Home() {
                 </Stack>
               ) : null}
             </Box>
+          </Box>
+          <Box pos="fixed" bottom={10} right={10} zIndex={52}>
+            <Button colorScheme="pink">Contact Us</Button>
+          </Box>
+          <Box
+            p={2}
+            pt={24}
+            maxW="7xl"
+            mx="auto"
+            sx={{ columnCount: [1, 2, 3], columnGap: "8px" }}
+          >
+            {srces.map((src) => (
+              <ChakraImage
+                key={src}
+                w="100%"
+                borderRadius="xl"
+                mb={2}
+                display="inline-block"
+                src={src}
+                alt="Alt"
+              />
+            ))}
           </Box>
         </Box>
       </main>
