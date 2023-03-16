@@ -39,6 +39,7 @@ const Layout = ({ children, data, ...rest }: Props) => {
         opacity={opacity}
         p={pathname === "/" ? { base: 0, md: 2 } : 2}
         pt={pathname === "/" ? { base: 0, md: 24 } : { base: 14, md: 24 }}
+        pb={pathname === "/" ? { base: 16, md: 8 } : { base: 24, md: 8 }}
         maxW="7xl"
         mx="auto"
         transition="opacity 0.5s ease"
