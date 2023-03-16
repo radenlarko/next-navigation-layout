@@ -1,5 +1,6 @@
 import { KategoriItem, LinkItem } from "@/types";
 import { menuDesktop } from "@/utils/listMenu";
+import { reduceLinkItem } from "@/utils/myFunction";
 import { Box, Text } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
@@ -16,23 +17,6 @@ interface IParams extends ParsedUrlQuery {
 const initialDetails: LinkItem = {
   name: "",
   link: "",
-};
-
-const reduceLinkItem = (data: KategoriItem[]): LinkItem[] => {
-  const dataTemp: LinkItem[] = [];
-
-  data.map((item) => {
-    item.items.map((child) => {
-      child.links.map((link) => {
-        dataTemp.push(link);
-        return link;
-      });
-      return child;
-    });
-    return item;
-  });
-
-  return dataTemp;
 };
 
 const DetailsKategory: NextPage<Props> = ({ data }) => {
