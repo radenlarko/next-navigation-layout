@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { MainContext } from "@/store/MainContext";
 import { LinkItem } from "@/types";
 import { Box, BoxProps, useColorModeValue } from "@chakra-ui/react";
@@ -14,6 +15,7 @@ interface Props extends BoxProps {
 const inter = Inter({ subsets: ["latin"] });
 
 const Layout = ({ children, data, ...rest }: Props) => {
+  const { pathname } = useRouter();
   const { setLinkItem } = useContext(MainContext);
   const [opacity, setOpacity] = useState(1);
 
@@ -35,11 +37,11 @@ const Layout = ({ children, data, ...rest }: Props) => {
       <MobileLayout />
       <Box
         opacity={opacity}
-        p={2}
-        pt={24}
+        p={pathname === "/" ? { base: 0, md: 2 } : 2}
+        pt={pathname === "/" ? { base: 0, md: 24 } : { base: 14, md: 24 }}
         maxW="7xl"
         mx="auto"
-        transition="all 0.5s ease"
+        transition="opacity 0.5s ease"
         {...rest}
       >
         {children}

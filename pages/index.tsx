@@ -16,7 +16,7 @@ export default function Home() {
           {srces.map((src) => (
             <Box
               key={src}
-              borderRadius="xl"
+              borderRadius={{base: "none", md: "xl"}}
               mb={1}
               display="inline-block"
               overflow="hidden"

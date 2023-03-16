@@ -1,4 +1,10 @@
-import { LinkItem, MenuDesktop } from "@/types";
+import { LinkItemMobile, MenuDesktop } from "@/types";
+import {
+  BsFillFilePersonFill,
+  BsFillGrid3X3GapFill,
+  BsFillHouseDoorFill,
+  BsFillLightbulbFill,
+} from "react-icons/bs";
 
 export const menuDesktop: MenuDesktop[] = [
   {
@@ -257,21 +263,25 @@ export const menuDesktop: MenuDesktop[] = [
   },
 ];
 
-export const mobileMenu: LinkItem[] = [
+export const mobileMenu: LinkItemMobile[] = [
   {
     name: "Beranda",
     link: "/",
+    icon: BsFillHouseDoorFill,
   },
   {
     name: "Kategori",
     link: "/kategori",
+    icon: BsFillGrid3X3GapFill,
   },
   {
     name: "Inspirasi",
     link: "/inspirasi",
+    icon: BsFillLightbulbFill,
   },
   {
     name: "Profil",
     link: "/profile",
+    icon: BsFillFilePersonFill,
   },
 ];

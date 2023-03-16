@@ -1,6 +1,12 @@
+import { IconType } from "react-icons/lib";
+
 export interface LinkItem {
   name: string;
   link: string;
+}
+
+export interface LinkItemMobile extends LinkItem {
+  icon: IconType;
 }
 
 export interface LinkKategoriItem {
