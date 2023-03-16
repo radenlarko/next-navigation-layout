@@ -1,9 +1,10 @@
-import { KategoriItem, MenuDesktop } from "@/types";
+import { MainContext } from "@/store/MainContext";
+import { KategoriItem, LinkItem, MenuDesktop } from "@/types";
 import sx from "@/utils/scrollStyle";
 import { Box, Grid, GridItem, Stack, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 
 interface Props {
   menuType: MenuDesktop;
@@ -19,6 +20,8 @@ const initialMenuProp = {
 };
 
 const MegaMenu = ({ menuType, menuProp, setMenuProp }: Props) => {
+  const { dataLink } = useContext(MainContext);
+
   const isMegaMenu = useMemo(() => {
     if (menuType.name === "Kategori" && menuProp.name) {
       return true;
@@ -57,7 +60,13 @@ const MegaMenu = ({ menuType, menuProp, setMenuProp }: Props) => {
                     onClick={() => setMenuProp(initialMenuProp)}
                     href={`/kategori/${link.name}`}
                   >
-                    <Text fontSize="sm" _hover={{ color: "pink.400" }}>
+                    <Text
+                      fontSize="sm"
+                      color={
+                        dataLink.name === link.name ? "pink.400" : "inherit"
+                      }
+                      _hover={{ color: "pink.400" }}
+                    >
                       {link.name}
                     </Text>
                   </Box>

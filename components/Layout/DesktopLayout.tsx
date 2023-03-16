@@ -1,9 +1,10 @@
-import { KategoriItem, MenuDesktop } from "@/types";
+import { MainContext } from "@/store/MainContext";
+import { KategoriItem, LinkItem, MenuDesktop } from "@/types";
 import { menuDesktop } from "@/utils/listMenu";
 import { Box, Button, HStack, Text } from "@chakra-ui/react";
 import debounce from "lodash.debounce";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import MegaMenu from "./MegaMenu";
 
 interface Props {
@@ -18,6 +19,7 @@ const initialMenuProp = {
 };
 
 const DesktopLayout = ({ setOpacity }: Props) => {
+  const {dataLink} = useContext(MainContext);
   const [menuType, setMenuType] = useState<MenuDesktop>(menuDesktop[0]);
   const [menuProp, setMenuProp] = useState<KategoriItem>(initialMenuProp);
 
@@ -86,6 +88,7 @@ const DesktopLayout = ({ setOpacity }: Props) => {
                     key={item.name}
                     as={Link}
                     cursor="pointer"
+                    color={dataLink.name === item.name ? "pink.400" : "inherit"}
                     _hover={{ color: "pink.400" }}
                     href={`/inspirasi/${item.name}`}
                   >
