@@ -16,7 +16,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 const Layout = ({ children, data, ...rest }: Props) => {
   const { pathname } = useRouter();
-  const { setLinkItem } = useContext(MainContext);
+  const { setLinkItem, setScrollActive } = useContext(MainContext);
   const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
@@ -24,6 +24,17 @@ const Layout = ({ children, data, ...rest }: Props) => {
       setLinkItem(data);
     }
   }, [data, setLinkItem]);
+
+  useEffect(() => {
+    const handleSetScroll = () => {
+      setScrollActive(window.scrollY > 100);
+    };
+    window.addEventListener("scroll", handleSetScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleSetScroll);
+    };
+  }, [setScrollActive]);
   return (
     <Box
       className={inter.className}

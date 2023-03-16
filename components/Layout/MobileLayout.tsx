@@ -9,24 +9,14 @@ import {
   Icon,
   Flex,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { BsBellFill, BsCartFill } from "react-icons/bs";
 import { mobileMenu } from "@/utils/listMenu";
+import { MainContext } from "@/store/MainContext";
 
 const MobileLayout = () => {
   const { pathname } = useRouter();
-  const [scrollActive, setScrollActive] = useState(false);
-
-  useEffect(() => {
-    const handleSetScroll = () => {
-      setScrollActive(window.scrollY > 100);
-    };
-    window.addEventListener("scroll", handleSetScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleSetScroll);
-    };
-  }, []);
+  const { scrollActive } = useContext(MainContext);
   return (
     <>
       <Box

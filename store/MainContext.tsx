@@ -9,6 +9,7 @@ import React, {
 enum ActionKind {
   RETRIEVE_DATA = "RETRIEVE_DATA",
   SET_LINK_ITEM = "SET_LINK_ITEM",
+  SET_SCROLL_ACTIVE = "SET_SCROLL_ACTIVE",
 }
 
 type ACTIONTYPE =
@@ -21,12 +22,19 @@ type ACTIONTYPE =
       type: ActionKind.SET_LINK_ITEM;
       isLoading?: boolean;
       dataLink: LinkItem;
+    }
+  | {
+      type: ActionKind.SET_SCROLL_ACTIVE;
+      isLoading?: boolean;
+      scrollActive: boolean;
     };
 
 interface State {
   isLoading: boolean;
   dataLink: LinkItem;
+  scrollActive: boolean;
   setLinkItem: (data: LinkItem) => void;
+  setScrollActive: (value: boolean) => void;
 }
 
 interface Props {
@@ -41,7 +49,9 @@ const initialDataLink: LinkItem = {
 const initialState: State = {
   isLoading: true,
   dataLink: initialDataLink,
+  scrollActive: false,
   setLinkItem: () => {},
+  setScrollActive: () => {},
 };
 
 export const MainContext = createContext<State>(initialState);
@@ -58,6 +68,12 @@ const mainReducer = (prevState: State, action: ACTIONTYPE) => {
       return {
         ...prevState,
         dataLink: action.dataLink,
+        isLoading: false,
+      };
+    case ActionKind.SET_SCROLL_ACTIVE:
+      return {
+        ...prevState,
+        scrollActive: action.scrollActive,
         isLoading: false,
       };
     default:
@@ -89,11 +105,19 @@ const ContextProvider = ({ children }: Props): JSX.Element => {
     });
   }, []);
 
+  const setScrollActive = useCallback((value: boolean) => {
+    dispatch({
+      type: ActionKind.SET_SCROLL_ACTIVE,
+      scrollActive: value,
+    });
+  }, []);
+
   return (
     <MainContext.Provider
       value={{
         ...state,
         setLinkItem,
+        setScrollActive,
       }}
     >
       {children}
