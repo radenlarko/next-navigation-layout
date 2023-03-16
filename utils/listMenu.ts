@@ -207,7 +207,7 @@ export const menuDesktop: MenuDesktop[] = [
             links: [
               {
                 name: "Pembuat Minuman dan Camilan",
-                link: "/kategori/dekorasi-dinding",
+                link: "/kategori/pembuat-minuman-dan-camilan",
               },
             ],
           },
