@@ -20,7 +20,9 @@ const Layout = ({ children, data, ...rest }: Props) => {
   const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
-    setLinkItem(data);
+    if (data) {
+      setLinkItem(data);
+    }
   }, [data, setLinkItem]);
   return (
     <Box
@@ -38,7 +40,7 @@ const Layout = ({ children, data, ...rest }: Props) => {
       <Box
         opacity={opacity}
         p={pathname === "/" ? { base: 0, md: 2 } : 2}
-        pt={pathname === "/" ? { base: 0, md: 24 } : { base: 14, md: 24 }}
+        pt={pathname === "/" ? { base: 0, md: 44 } : { base: 14, md: 44 }}
         pb={pathname === "/" ? { base: 16, md: 8 } : { base: 24, md: 8 }}
         maxW="7xl"
         mx="auto"
