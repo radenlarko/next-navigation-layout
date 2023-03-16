@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { MenuDesktop } from "@/types";
 import { menuDesktop } from "@/utils/listMenu";
 import { Box, Button, HStack, IconButton, Input, Text } from "@chakra-ui/react";
@@ -13,7 +14,7 @@ interface Props {
 const MainNavbar = ({ menuType, setMenuType }: Props) => {
   return (
     <HStack maxW="7xl" p={2} spacing={6} mx="auto">
-      <Box position="relative">
+      <Box as={Link} position="relative" href="/">
         <Image
           src="/logo-brand.svg"
           alt="logo-brand"
