@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { LoginInputs } from "@/types/formValue";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
@@ -16,8 +17,9 @@ import {
 import { GetStaticProps, NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { MainContext } from "@/store/MainContext";
 
 interface Props {
   isCustomLayout: boolean;
@@ -29,6 +31,8 @@ const defaultValues: LoginInputs = {
 };
 
 const Login: NextPage<Props> = () => {
+  const { push } = useRouter();
+  const { signIn } = useContext(MainContext);
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -38,7 +42,10 @@ const Login: NextPage<Props> = () => {
   } = useForm<LoginInputs>({ defaultValues });
 
   const onSubmit: SubmitHandler<LoginInputs> = (dataSubmit) => {
-    console.log(dataSubmit);
+    signIn(dataSubmit.username);
+    setTimeout(() => {
+      push("/");
+    }, 500);
   };
 
   return (
