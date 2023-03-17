@@ -1,6 +1,8 @@
 import Head from "next/head";
-import { Box, Image as ChakraImage } from "@chakra-ui/react";
+import { Box, Image as ChakraImage, Text } from "@chakra-ui/react";
 import srces from "@/utils/listImage";
+import { ContentCarousel, MainCarousel } from "@/components";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -12,11 +14,39 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Box sx={{ columnCount: [1, 2, 4], columnGap: 2 }}>
+        <MainCarousel />
+        <ContentCarousel mt={8}>
+          {srces.map((item, idx) => (
+            <Box key={item} p={4} bg="white" mr={4} borderRadius="lg" boxShadow="lg">
+              <Box w={{ base: "300px", md: "240px" }}>
+                <Text fontWeight={500}>Content {idx + 1}</Text>
+              </Box>
+              <Box
+                position="relative"
+                mt={2}
+                w="full"
+                h={{ base: "200px", md: "160px" }}
+                borderRadius="md"
+                overflow="hidden"
+              >
+                <Image
+                  src={item}
+                  alt="list-carousel"
+                  fill
+                  sizes="(max-width: 768px) 100vw,
+                  (max-width: 1200px) 50vw,
+                  33vw"
+                  style={{ objectFit: "cover" }}
+                />
+              </Box>
+            </Box>
+          ))}
+        </ContentCarousel>
+        <Box mt={8} sx={{ columnCount: [1, 2, 4], columnGap: 2 }}>
           {srces.map((src) => (
             <Box
               key={src}
-              borderRadius={{base: "none", md: "xl"}}
+              borderRadius={{ base: "none", md: "xl" }}
               mb={1}
               display="inline-block"
               overflow="hidden"

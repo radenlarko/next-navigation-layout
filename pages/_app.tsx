@@ -4,6 +4,7 @@ import Layout from "@/components/Layout";
 import ContextProvider from "@/store/MainContext";
 import { useMemo } from "react";
 import { LinkItem } from "@/types";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   const { data, isCustomLayout } = pageProps;

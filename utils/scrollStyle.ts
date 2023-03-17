@@ -12,4 +12,9 @@ const sx: SystemStyleObject = {
   },
 };
 
+export const sxNone: SystemStyleObject = {
+  "&::-webkit-scrollbar": { display: "none" },
+  "&::-webkit-scrollbar-thumb": { display: "none" },
+};
+
 export default sx;
