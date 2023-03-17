@@ -135,6 +135,7 @@ const ContextProvider = ({ children }: Props): JSX.Element => {
   }, []);
 
   const signIn = useCallback((username: string) => {
+    localStorage.setItem(StorageKind.username, username);
     dispatch({
       type: ActionKind.LOG_IN,
       username,
@@ -142,6 +143,7 @@ const ContextProvider = ({ children }: Props): JSX.Element => {
   }, []);
 
   const signOut = useCallback(() => {
+    localStorage.removeItem(StorageKind.username);
     dispatch({ type: ActionKind.LOG_OUT });
   }, []);
 
