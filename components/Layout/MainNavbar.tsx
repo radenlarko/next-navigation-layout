@@ -59,7 +59,12 @@ const MainNavbar = ({ menuType, setMenuType }: Props) => {
         />
       </HStack>
       <HStack>
-        <Button variant="outline" colorScheme="pink">
+        <Button
+          as={Link}
+          variant="outline"
+          colorScheme="pink"
+          href="/auth/login"
+        >
           Masuk
         </Button>
         <Button colorScheme="pink">Daftar</Button>

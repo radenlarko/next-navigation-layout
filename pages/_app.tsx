@@ -6,20 +6,24 @@ import { useMemo } from "react";
 import { LinkItem } from "@/types";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { data } = pageProps;
+  const { data, isCustomLayout } = pageProps;
 
   const dataLink = useMemo<LinkItem | undefined>(() => {
     if (data?.name && data?.link) {
       return data as LinkItem;
     }
   }, [data]);
-  
+
   return (
     <ChakraProvider>
       <ContextProvider>
-        <Layout data={dataLink}>
+        {isCustomLayout ? (
           <Component {...pageProps} />
-        </Layout>
+        ) : (
+          <Layout data={dataLink}>
+            <Component {...pageProps} />
+          </Layout>
+        )}
       </ContextProvider>
     </ChakraProvider>
   );
