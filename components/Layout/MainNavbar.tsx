@@ -1,10 +1,25 @@
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { MenuDesktop } from "@/types";
 import { menuDesktop } from "@/utils/listMenu";
-import { Box, Button, HStack, IconButton, Input, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  IconButton,
+  Input,
+  Menu,
+  MenuButton,
+  Text,
+  Icon,
+  MenuList,
+  MenuItem,
+} from "@chakra-ui/react";
 import Image from "next/image";
-import React from "react";
+import React, { useCallback, useContext } from "react";
 import { BsBellFill, BsCartFill, BsSearch } from "react-icons/bs";
+import { FiChevronDown, FiLogOut, FiUser } from "react-icons/fi";
+import { MainContext } from "@/store/MainContext";
 
 interface Props {
   menuType: MenuDesktop;
@@ -12,6 +27,16 @@ interface Props {
 }
 
 const MainNavbar = ({ menuType, setMenuType }: Props) => {
+  const { push } = useRouter();
+  const { username, signOut } = useContext(MainContext);
+
+  const handleLogout = useCallback(() => {
+    signOut();
+    setTimeout(() => {
+      push("/auth/login");
+    }, 500);
+  }, [push, signOut]);
+
   return (
     <HStack maxW="7xl" p={2} spacing={6} mx="auto">
       <Box as={Link} position="relative" href="/">
@@ -58,17 +83,47 @@ const MainNavbar = ({ menuType, setMenuType }: Props) => {
           variant="ghost"
         />
       </HStack>
-      <HStack>
-        <Button
-          as={Link}
-          variant="outline"
-          colorScheme="pink"
-          href="/auth/login"
-        >
-          Masuk
-        </Button>
-        <Button colorScheme="pink">Daftar</Button>
-      </HStack>
+      {username ? (
+        <Menu>
+          <MenuButton
+            as={Button}
+            fontWeight={400}
+            variant="ghost"
+            _hover={{ color: "pink.400" }}
+            _active={{ bg: "inherit" }}
+          >
+            <HStack>
+              <Box textAlign="left">
+                <Text fontSize="xs">Selamat Datang</Text>
+                <Text fontSize="sm" fontWeight={500}>
+                  {username}
+                </Text>
+              </Box>
+              <Icon as={FiChevronDown} />
+            </HStack>
+          </MenuButton>
+          <MenuList>
+            <MenuItem as={Link} href="/profile" icon={<FiUser />}>
+              Profile
+            </MenuItem>
+            <MenuItem icon={<FiLogOut />} onClick={handleLogout}>
+              Logout
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      ) : (
+        <HStack>
+          <Button
+            as={Link}
+            variant="outline"
+            colorScheme="pink"
+            href="/auth/login"
+          >
+            Masuk
+          </Button>
+          <Button colorScheme="pink">Daftar</Button>
+        </HStack>
+      )}
     </HStack>
   );
 };
