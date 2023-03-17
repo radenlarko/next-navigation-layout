@@ -50,7 +50,7 @@ const Login: NextPage<Props> = () => {
 
   return (
     <Box bg="rgb(238, 77, 45)" minH="100vh">
-      <Box position="fixed" w="full" bg="white">
+      <Box position="fixed" w="full" bg="white" zIndex={48}>
         <HStack
           maxW="7xl"
           mx="auto"
