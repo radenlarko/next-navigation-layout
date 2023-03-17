@@ -8,15 +8,31 @@ import React, {
 
 enum ActionKind {
   RETRIEVE_DATA = "RETRIEVE_DATA",
+  LOG_IN = "LOG_IN",
+  LOG_OUT = "LOG_OUT",
   SET_LINK_ITEM = "SET_LINK_ITEM",
   SET_SCROLL_ACTIVE = "SET_SCROLL_ACTIVE",
+}
+
+enum StorageKind {
+  username = "username",
 }
 
 type ACTIONTYPE =
   | {
       type: ActionKind.RETRIEVE_DATA;
       isLoading?: boolean;
-      dataLink: LinkItem;
+      username: string;
+    }
+  | {
+      type: ActionKind.LOG_IN;
+      isLoading?: boolean;
+      username: string;
+    }
+  | {
+      type: ActionKind.LOG_OUT;
+      isLoading?: boolean;
+      username?: string;
     }
   | {
       type: ActionKind.SET_LINK_ITEM;
@@ -33,6 +49,9 @@ interface State {
   isLoading: boolean;
   dataLink: LinkItem;
   scrollActive: boolean;
+  username: string;
+  signIn: (username: string) => void;
+  signOut: () => void;
   setLinkItem: (data: LinkItem) => void;
   setScrollActive: (value: boolean) => void;
 }
@@ -50,6 +69,9 @@ const initialState: State = {
   isLoading: true,
   dataLink: initialDataLink,
   scrollActive: false,
+  username: "",
+  signIn: () => {},
+  signOut: () => {},
   setLinkItem: () => {},
   setScrollActive: () => {},
 };
@@ -61,7 +83,19 @@ const mainReducer = (prevState: State, action: ACTIONTYPE) => {
     case ActionKind.RETRIEVE_DATA:
       return {
         ...prevState,
-        dataLink: action.dataLink,
+        username: action.username,
+        isLoading: false,
+      };
+    case ActionKind.LOG_IN:
+      return {
+        ...prevState,
+        username: action.username,
+        isLoading: false,
+      };
+    case ActionKind.LOG_OUT:
+      return {
+        ...prevState,
+        username: "",
         isLoading: false,
       };
     case ActionKind.SET_LINK_ITEM:
@@ -89,13 +123,26 @@ const ContextProvider = ({ children }: Props): JSX.Element => {
 
   useEffect(() => {
     const getInitialData = () => {
+      const usernameStorage = localStorage.getItem(StorageKind.username);
+      const username = usernameStorage === null ? "" : usernameStorage;
       dispatch({
         type: ActionKind.RETRIEVE_DATA,
-        dataLink: initialDataLink,
+        username,
       });
     };
 
     getInitialData();
+  }, []);
+
+  const signIn = useCallback((username: string) => {
+    dispatch({
+      type: ActionKind.LOG_IN,
+      username,
+    });
+  }, []);
+
+  const signOut = useCallback(() => {
+    dispatch({ type: ActionKind.LOG_OUT });
   }, []);
 
   const setLinkItem = useCallback((data: LinkItem) => {
@@ -116,6 +163,8 @@ const ContextProvider = ({ children }: Props): JSX.Element => {
     <MainContext.Provider
       value={{
         ...state,
+        signIn,
+        signOut,
         setLinkItem,
         setScrollActive,
       }}
