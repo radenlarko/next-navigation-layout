@@ -30,7 +30,7 @@ const MainSubNavbar = ({ menuType, setOpacity }: Props) => {
       role="group"
       boxShadow={menuProp.name ? "2xl" : "sm"}
       onMouseLeave={() => {
-        setMenuProp(initialMenuProp);
+        setMenuPropDebounce(initialMenuProp);
         setOpacity(1);
       }}
     >
