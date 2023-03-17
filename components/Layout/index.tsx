@@ -8,7 +8,7 @@ import DesktopLayout from "./DesktopLayout";
 import MobileLayout from "./MobileLayout";
 
 interface Props extends BoxProps {
-  data: LinkItem;
+  data?: LinkItem;
   children: React.ReactNode;
 }
 
@@ -16,14 +16,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 const Layout = ({ children, data, ...rest }: Props) => {
   const { pathname } = useRouter();
-  const { setLinkItem, setScrollActive } = useContext(MainContext);
+  const { isLoading, setLinkItem, setScrollActive } = useContext(MainContext);
   const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
-    if (data) {
+    if (data && !isLoading) {
       setLinkItem(data);
     }
-  }, [data, setLinkItem]);
+  }, [isLoading, data, setLinkItem]);
 
   useEffect(() => {
     const handleSetScroll = () => {
