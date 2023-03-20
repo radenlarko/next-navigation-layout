@@ -1,14 +1,36 @@
 import { sxNone } from "@/utils/scrollStyle";
-import { Flex, FlexProps, IconButton } from "@chakra-ui/react";
+import { Flex, FlexProps, IconButton, IconButtonProps } from "@chakra-ui/react";
 import debounce from "lodash.debounce";
 import React, { useCallback, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 interface Props extends FlexProps {
   children: React.ReactNode;
+  iconSize?: "sm" | "md" | "lg" | "xs";
 }
 
-const ContentCarousel = ({ children, ...rest }: Props) => {
+const IconNavigate = ({ ...rest }: IconButtonProps) => {
+  return (
+    <IconButton
+      display={{ base: "none", md: "flex" }}
+      position="absolute"
+      opacity={0}
+      bg="whiteAlpha.800"
+      borderRadius="full"
+      boxShadow="md"
+      transition="all 0.3s ease"
+      _disabled={{ opacity: 0 }}
+      _hover={{ bg: "white" }}
+      _groupHover={{
+        opacity: 1,
+        _disabled: { opacity: 0, cursor: "default" },
+      }}
+      {...rest}
+    />
+  );
+};
+
+const ContentCarousel = ({ children, iconSize, ...rest }: Props) => {
   const [navScroll, setNavScroll] = useState({
     prev: false,
     next: true,
@@ -59,47 +81,21 @@ const ContentCarousel = ({ children, ...rest }: Props) => {
       >
         {children}
       </Flex>
-      <IconButton
-        display={{ base: "none", md: "flex" }}
-        position="absolute"
-        opacity={0}
+      <IconNavigate
         left={-6}
         aria-label="previous"
-        bg="whiteAlpha.800"
         icon={<FiChevronLeft />}
         onClick={moveLeft}
         isDisabled={!navScroll.prev}
-        size={!navScroll.prev ? "sm" : "lg"}
-        borderRadius="full"
-        boxShadow="md"
-        transition="all 0.3s ease"
-        _disabled={{ opacity: 0 }}
-        _hover={{ bg: "white" }}
-        _groupHover={{
-          opacity: 1,
-          _disabled: { opacity: 0, cursor: "default" },
-        }}
+        size={iconSize || "lg"}
       />
-      <IconButton
-        display={{ base: "none", md: "flex" }}
-        position="absolute"
-        opacity={0}
+      <IconNavigate
         right={-6}
         aria-label="next"
-        bg="whiteAlpha.800"
         icon={<FiChevronRight />}
         onClick={moveRight}
         isDisabled={!navScroll.next}
-        size={!navScroll.next ? "sm" : "lg"}
-        borderRadius="full"
-        boxShadow="md"
-        transition="all 0.3s ease"
-        _disabled={{ opacity: 0 }}
-        _hover={{ bg: "white" }}
-        _groupHover={{
-          opacity: 1,
-          _disabled: { opacity: 0, cursor: "default" },
-        }}
+        size={iconSize || "lg"}
       />
     </Flex>
   );
